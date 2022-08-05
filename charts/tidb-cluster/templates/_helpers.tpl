@@ -182,7 +182,7 @@ Get password secret name
 {{- .Values.tidb.passwordSecretName }}
 {{- else -}}
 {{- if .Values.tidb.auth.create -}}
-{{ printf "%s-tidb" (include "tidb-cluster.fullname" .) }}
+{{ printf "%s-tidb" (include "cluster.name" .) }}
 {{- end -}}
 {{- end -}}
 {{- end }}
