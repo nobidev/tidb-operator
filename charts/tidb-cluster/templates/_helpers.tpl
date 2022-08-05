@@ -182,7 +182,7 @@ Get password secret name
 {{- .Values.tidb.passwordSecretName }}
 {{- else -}}
 {{- if .Values.tidb.auth.create -}}
-{{ printf "%s-tidb" (include "cluster.name" .) }}
+{{ printf "%s-tidb-credentials" (include "cluster.name" .) }}
 {{- end -}}
 {{- end -}}
 {{- end }}
@@ -195,9 +195,8 @@ Get password or generate random
 {{- .Values.tidb.auth.password }}
 {{- else -}}
 {{- $secrets := (lookup "v1" "Secret" .Release.Namespace (include "tidb-cluster.tidb.passwordSecretName" .)).data -}}
-{{- $key := (printf "%s-password" .Values.tidb.auth.username) -}}
-{{- if hasKey $secrets $key }}
-{{- index $secrets $key | b64dec -}}
+{{- if hasKey $secrets .Values.tidb.auth.username }}
+{{- index $secrets .Values.tidb.auth.username | b64dec -}}
 {{- else -}}
 {{- include "tidb-cluster.randomPassword" . -}}
 {{- end -}}
