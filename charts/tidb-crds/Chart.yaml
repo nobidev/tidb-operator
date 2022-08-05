@@ -1,0 +1,13 @@
+apiVersion: v1
+description: tidb-crds Helm chart for Kubernetes
+name: tidb-crds
+version: v1
+appVersion: v1
+home: https://github.com/nobidev/tidb-operator
+sources:
+  - https://github.com/nobidev/tidb-operator
+keywords:
+  - crd
+maintainers:
+- name: nobidev
+  email: tidb-operator@nobidev.com
