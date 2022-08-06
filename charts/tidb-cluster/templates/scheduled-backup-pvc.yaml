@@ -18,7 +18,5 @@ spec:
   resources:
     requests:
       storage: {{ .Values.scheduledBackup.storage }}
-{{- if .Values.scheduledBackup.storageClassName }}
   storageClassName: {{ .Values.scheduledBackup.storageClassName }}
-{{- end }}
 {{- end }}

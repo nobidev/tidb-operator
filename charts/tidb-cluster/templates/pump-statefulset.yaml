@@ -89,9 +89,7 @@ spec:
       name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-    {{- if .Values.binlog.pump.storageClassName }}
       storageClassName: {{ .Values.binlog.pump.storageClassName }}
-    {{- end }}
       resources:
         requests:
           storage: {{ .Values.binlog.pump.storage }}

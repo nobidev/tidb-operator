@@ -17,7 +17,5 @@ spec:
   resources:
     requests:
       storage: {{ .Values.monitor.storage }}
-{{- if .Values.monitor.storageClassName }}
   storageClassName: {{ .Values.monitor.storageClassName }}
-{{- end }}
 {{- end }}

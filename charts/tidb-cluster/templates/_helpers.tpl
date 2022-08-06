@@ -77,15 +77,27 @@ config-file: |-
 {{ include "tikv-configmap.data" . | sha256sum | trunc 8 }}
 {{- end -}}
 
+{{- define "tidb-configmap.data.init-sql" -}}
+  {{- if (and .Values.tidb.auth.enabled .Values.tidb.auth.database) }}
+  CREATE DATABASE IF NOT EXISTS {{ .Values.tidb.auth.database }};
+  {{- if .Values.tidb.auth.username }}
+  GRANT ALL PRIVILEGES ON {{ .Values.tidb.auth.database }}.* TO '{{ .Values.tidb.auth.username }}'@'%';
+  {{- end -}}
+  {{- end -}}
+  {{- if .Values.tidb.initSql }}
+{{ .Values.tidb.initSql | indent 2 -}}
+  {{- end -}}
+{{- end -}}
+
 {{/*
 Encapsulate TiDB configmap data for consistent digest calculation
 */}}
 {{- define "tidb-configmap.data" -}}
 startup-script: |-
 {{ tuple "scripts/_start_tidb.sh.tpl" . | include "helm-toolkit.utils.template" | indent 2 }}
-  {{- if .Values.tidb.initSql }}
+  {{- if (or .Values.tidb.initSql (and .Values.tidb.auth.enabled .Values.tidb.auth.database)) }}
 init-sql: |-
-{{ .Values.tidb.initSql | indent 2 }}
+  {{- include "tidb-configmap.data.init-sql" . }}
   {{- end }}
 config-file: |-
     {{- if .Values.tidb.config }}
@@ -181,8 +193,24 @@ Get password secret name
 {{- if .Values.tidb.passwordSecretName }}
 {{- .Values.tidb.passwordSecretName }}
 {{- else -}}
-{{- if .Values.tidb.auth.create -}}
+{{- if .Values.tidb.auth.enabled -}}
 {{ printf "%s-tidb-credentials" (include "cluster.name" .) }}
+{{- end -}}
+{{- end -}}
+{{- end }}
+
+{{/*
+Get root password or generate random
+*/}}
+{{- define "tidb-cluster.tidb.rootPassword" }}
+{{- if .Values.tidb.auth.rootPassword }}
+{{- .Values.tidb.auth.rootPassword }}
+{{- else -}}
+{{- $secrets := (lookup "v1" "Secret" .Release.Namespace (include "tidb-cluster.tidb.passwordSecretName" .)).data -}}
+{{- if hasKey $secrets "root" }}
+{{- index $secrets "root" | b64dec -}}
+{{- else -}}
+{{- include "tidb-cluster.randomPassword" . -}}
 {{- end -}}
 {{- end -}}
 {{- end }}
