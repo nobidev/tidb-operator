@@ -83,9 +83,14 @@ Encapsulate TiDB configmap data for consistent digest calculation
 {{- define "tidb-configmap.data" -}}
 startup-script: |-
 {{ tuple "scripts/_start_tidb.sh.tpl" . | include "helm-toolkit.utils.template" | indent 2 }}
-  {{- if .Values.tidb.initSql }}
+  {{- if (or .Values.tidb.initSql (and .Values.tidb.auth.enabled .Values.tidb.auth.database)) }}
 init-sql: |-
-{{ .Values.tidb.initSql | indent 2 }}
+    {{- if (and .Values.tidb.auth.enabled .Values.tidb.auth.database) }}
+  CREATE DATABASE IF NOT EXISTS {{ .Values.tidb.auth.database }};
+    {{- end -}}
+    {{- if .Values.tidb.initSql }}
+{{ .Values.tidb.initSql | indent 2 -}}
+    {{- end -}}
   {{- end }}
 config-file: |-
     {{- if .Values.tidb.config }}
