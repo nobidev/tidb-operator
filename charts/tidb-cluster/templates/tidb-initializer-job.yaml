@@ -56,18 +56,14 @@ spec:
         - -c
         - |
 {{ tuple "scripts/_initialize_tidb_users.py.tpl" . | include "helm-toolkit.utils.template" | indent 10 }}
-        {{- if or (include "tidb-cluster.tidb.passwordSecretName" .) .Values.tidb.initSql .Values.tidb.initSqlConfigMapName }}
+        {{- if or (include "tidb-cluster.tidb.passwordSecretName" .) .Values.tidb.initSql .Values.tidb.initSqlConfigMapName .Values.tidb.database }}
         volumeMounts:
           {{- if (include "tidb-cluster.tidb.passwordSecretName" .) }}
           - name: password
             mountPath: /etc/tidb/password
             readOnly: true
           {{- end }}
-          {{- if .Values.tidb.initSqlConfigMapName }}
-          - name: init-sql
-            mountPath: /data
-            readOnly: true
-          {{- else if .Values.tidb.initSql }}
+          {{- if or .Values.tidb.initSqlConfigMapName (include "tidb-configmap.data.init-sql" .) }}
           - name: init-sql
             mountPath: /data
             readOnly: true
@@ -94,7 +90,7 @@ spec:
             items:
               - key: init-sql
                 path: init.sql
-        {{- else if .Values.tidb.initSql }}
+        {{- else if (include "tidb-configmap.data.init-sql" .) }}
         - name: init-sql
           configMap:
             name: {{ template "cluster.name" . }}-tidb
