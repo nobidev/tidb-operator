@@ -38,6 +38,15 @@ spec:
     nodePort: {{ .Values.tidb.service.statusNodePort }}
     {{- end }}
   {{- end }}
+  {{- if .Values.ticdc.create }}
+  - name: ticdc
+    port: 8301
+    targetPort: 8301
+    protocol: TCP
+    {{- if .Values.ticdc.service.ticdcNodePort }}
+    nodePort: {{ .Values.ticdc.service.ticdcNodePort }}
+    {{- end }}
+  {{- end }}
   selector:
     app.kubernetes.io/name: {{ template "chart.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

@@ -98,6 +98,38 @@ spec:
     priorityClassName: {{ .Values.tikv.priorityClassName }}
   {{- end }}
     maxFailoverCount: {{ .Values.tikv.maxFailoverCount | default 3 }}
+  {{- if .Values.ticdc.create }}
+  ticdc:
+    replicas: {{ .Values.ticdc.replicas }}
+    image: {{ .Values.ticdc.image }}
+    imagePullPolicy: {{ .Values.ticdc.imagePullPolicy | default "IfNotPresent" }}
+  {{- if .Values.ticdc.storageClassName }}
+    storageClassName: {{ .Values.ticdc.storageClassName }}
+  {{- end }}
+  {{- if .Values.ticdc.resources }}
+{{ toYaml .Values.ticdc.resources | indent 4 }}
+  {{- end }}
+    affinity:
+{{ toYaml .Values.ticdc.affinity | indent 6 }}
+    nodeSelector:
+{{ toYaml .Values.ticdc.nodeSelector | indent 6 }}
+  {{- if .Values.ticdc.tolerations }}
+    tolerations:
+{{ toYaml .Values.ticdc.tolerations | indent 4 }}
+  {{- end }}
+  {{- if .Values.ticdc.annotations }}
+    annotations:
+{{ toYaml .Values.ticdc.annotations | indent 6 }}
+  {{- end }}
+    hostNetwork: {{ .Values.ticdc.hostNetwork }}
+  {{- if .Values.ticdc.podSecurityContext }}
+    podSecurityContext:
+{{ toYaml .Values.ticdc.podSecurityContext | indent 6}}
+  {{- end }}
+  {{- if .Values.ticdc.priorityClassName }}
+    priorityClassName: {{ .Values.ticdc.priorityClassName }}
+  {{- end }}
+  {{- end }}
   tidb:
   {{- if .Values.tidb.tlsClient }}
     tlsClient:
