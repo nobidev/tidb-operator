@@ -11,3 +11,7 @@ keywords:
   - database
   - mysql
   - raft
+dependencies:
+  - name: helm-utils
+    repository: https://charts.nobidev.com
+    version: 1.x.x
