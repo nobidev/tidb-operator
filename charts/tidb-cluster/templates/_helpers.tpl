@@ -203,6 +203,11 @@ Get password secret name
 Get root password or generate random
 */}}
 {{- define "tidb-cluster.tidb.rootPassword" }}
+{{- $pwd := include "tidb-cluster.tidb.getRootPassword" . }}
+{{- include "helm.kv.getOrSet" (dict "context" $ "key" "tidb-cluster.tidb.rootPassword" "value" $pwd) -}}
+{{- end }}
+
+{{- define "tidb-cluster.tidb.getRootPassword" }}
 {{- if .Values.tidb.auth.rootPassword }}
 {{- .Values.tidb.auth.rootPassword }}
 {{- else -}}
@@ -219,6 +224,11 @@ Get root password or generate random
 Get password or generate random
 */}}
 {{- define "tidb-cluster.tidb.password" }}
+{{- $pwd := include "tidb-cluster.tidb.getPassword" . }}
+{{- include "helm.kv.getOrSet" (dict "context" $ "key" "tidb-cluster.tidb.password" "value" $pwd) -}}
+{{- end }}
+
+{{- define "tidb-cluster.tidb.getPassword" }}
 {{- if .Values.tidb.auth.password }}
 {{- .Values.tidb.auth.password }}
 {{- else -}}
