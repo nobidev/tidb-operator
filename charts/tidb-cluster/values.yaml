@@ -116,7 +116,7 @@ pd:
   # different classes might map to quality-of-service levels, or to backup policies,
   # or to arbitrary policies determined by the cluster administrators.
   # refer to https://kubernetes.io/docs/concepts/storage/storage-classes
-  storageClassName: local-storage
+  storageClassName: ''
 
   # Image pull policy.
   imagePullPolicy: IfNotPresent
@@ -263,7 +263,7 @@ tikv:
   # different classes might map to quality-of-service levels, or to backup policies,
   # or to arbitrary policies determined by the cluster administrators.
   # refer to https://kubernetes.io/docs/concepts/storage/storage-classes
-  storageClassName: local-storage
+  storageClassName: ''
 
   # Image pull policy.
   imagePullPolicy: IfNotPresent
@@ -597,7 +597,7 @@ monitor:
   # If you set rbac.create to true, you should leave this empty.
   # serviceAccount:
   persistent: false
-  storageClassName: local-storage
+  storageClassName: ''
   storage: 10Gi
   initializer:
     image: pingcap/tidb-monitor-initializer:v6.1.0
@@ -693,7 +693,7 @@ binlog:
     # different classes might map to quality-of-service levels, or to backup policies,
     # or to arbitrary policies determined by the cluster administrators.
     # refer to https://kubernetes.io/docs/concepts/storage/storage-classes
-    storageClassName: local-storage
+    storageClassName: ''
     storage: 20Gi
     # affinity for pump pod assignment, default: empty
     # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
@@ -762,7 +762,7 @@ binlog:
     # different classes might map to quality-of-service levels, or to backup policies,
     # or to arbitrary policies determined by the cluster administrators.
     # refer to https://kubernetes.io/docs/concepts/storage/storage-classes
-    storageClassName: local-storage
+    storageClassName: ''
     storage: 10Gi
     # affinity for drainer pod assignment, default: empty
     # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
@@ -839,7 +839,7 @@ scheduledBackup:
   # different classes might map to quality-of-service levels, or to backup policies,
   # or to arbitrary policies determined by the cluster administrators.
   # refer to https://kubernetes.io/docs/concepts/storage/storage-classes
-  storageClassName: local-storage
+  storageClassName: ''
   storage: 100Gi
   # When set to true, cleans up the backup data on storage upon successful upload to the cloud object storage
   cleanupAfterUpload: false
@@ -922,7 +922,7 @@ importer:
   create: false
   image: pingcap/tidb-lightning:v6.1.0
   imagePullPolicy: IfNotPresent
-  storageClassName: local-storage
+  storageClassName: ''
   storage: 200Gi
   resources: {}
     # limits:

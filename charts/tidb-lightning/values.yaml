@@ -29,7 +29,7 @@ dataSource:
     # backupName: scheduled-backup-20190822-041004
   remote:
     rcloneImage: rclone/rclone:1.55.1
-    storageClassName: local-storage
+    storageClassName: ''
     storage: 100Gi
     secretName: cloud-storage-secret
     path: s3:bench-data-us/sysbench/sbtest_16_1e7.tar.gz
@@ -97,7 +97,7 @@ backend: local
 
 # For `local` backend, an extra PV is needed for local KV sorting.
 sortedKV:
-  storageClassName: local-storage
+  storageClassName: ''
   storage: 100Gi
 
 # Specify a Service Account for lightning
