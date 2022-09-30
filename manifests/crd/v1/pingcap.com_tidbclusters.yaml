@@ -7511,6 +7511,12 @@ spec:
                       type: string
                   type: object
                 type: array
+              startScriptVersion:
+                enum:
+                - ""
+                - v1
+                - v2
+                type: string
               statefulSetUpdateStrategy:
                 type: string
               suspendAction:
@@ -14748,6 +14754,17 @@ spec:
                       pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                       x-kubernetes-int-or-string: true
                     type: object
+                  scalePolicy:
+                    properties:
+                      scaleInParallelism:
+                        default: 1
+                        format: int32
+                        type: integer
+                      scaleOutParallelism:
+                        default: 1
+                        format: int32
+                        type: integer
+                    type: object
                   schedulerName:
                     type: string
                   serviceAccount:
@@ -17135,6 +17152,17 @@ spec:
                     type: object
                   rocksDBLogVolumeName:
                     type: string
+                  scalePolicy:
+                    properties:
+                      scaleInParallelism:
+                        default: 1
+                        format: int32
+                        type: integer
+                      scaleOutParallelism:
+                        default: 1
+                        format: int32
+                        type: integer
+                    type: object
                   schedulerName:
                     type: string
                   separateRaftLog:
@@ -17491,6 +17519,18 @@ spec:
                           x-kubernetes-int-or-string: true
                         currentCount:
                           type: integer
+                        currentStorageClass:
+                          type: string
+                        modifiedCapacity:
+                          anyOf:
+                          - type: integer
+                          - type: string
+                          pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                          x-kubernetes-int-or-string: true
+                        modifiedCount:
+                          type: integer
+                        modifiedStorageClass:
+                          type: string
                         name:
                           type: string
                         resizedCapacity:
@@ -17502,9 +17542,7 @@ spec:
                         resizedCount:
                           type: integer
                       required:
-                      - currentCapacity
                       - name
-                      - resizedCapacity
                       type: object
                     type: object
                 type: object
@@ -17623,6 +17661,18 @@ spec:
                           x-kubernetes-int-or-string: true
                         currentCount:
                           type: integer
+                        currentStorageClass:
+                          type: string
+                        modifiedCapacity:
+                          anyOf:
+                          - type: integer
+                          - type: string
+                          pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                          x-kubernetes-int-or-string: true
+                        modifiedCount:
+                          type: integer
+                        modifiedStorageClass:
+                          type: string
                         name:
                           type: string
                         resizedCapacity:
@@ -17634,9 +17684,7 @@ spec:
                         resizedCount:
                           type: integer
                       required:
-                      - currentCapacity
                       - name
-                      - resizedCapacity
                       type: object
                     type: object
                 type: object
@@ -17757,6 +17805,18 @@ spec:
                           x-kubernetes-int-or-string: true
                         currentCount:
                           type: integer
+                        currentStorageClass:
+                          type: string
+                        modifiedCapacity:
+                          anyOf:
+                          - type: integer
+                          - type: string
+                          pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                          x-kubernetes-int-or-string: true
+                        modifiedCount:
+                          type: integer
+                        modifiedStorageClass:
+                          type: string
                         name:
                           type: string
                         resizedCapacity:
@@ -17768,9 +17828,7 @@ spec:
                         resizedCount:
                           type: integer
                       required:
-                      - currentCapacity
                       - name
-                      - resizedCapacity
                       type: object
                     type: object
                 type: object
@@ -17910,6 +17968,18 @@ spec:
                           x-kubernetes-int-or-string: true
                         currentCount:
                           type: integer
+                        currentStorageClass:
+                          type: string
+                        modifiedCapacity:
+                          anyOf:
+                          - type: integer
+                          - type: string
+                          pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                          x-kubernetes-int-or-string: true
+                        modifiedCount:
+                          type: integer
+                        modifiedStorageClass:
+                          type: string
                         name:
                           type: string
                         resizedCapacity:
@@ -17921,9 +17991,7 @@ spec:
                         resizedCount:
                           type: integer
                       required:
-                      - currentCapacity
                       - name
-                      - resizedCapacity
                       type: object
                     type: object
                 type: object
@@ -18124,6 +18192,18 @@ spec:
                           x-kubernetes-int-or-string: true
                         currentCount:
                           type: integer
+                        currentStorageClass:
+                          type: string
+                        modifiedCapacity:
+                          anyOf:
+                          - type: integer
+                          - type: string
+                          pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                          x-kubernetes-int-or-string: true
+                        modifiedCount:
+                          type: integer
+                        modifiedStorageClass:
+                          type: string
                         name:
                           type: string
                         resizedCapacity:
@@ -18135,9 +18215,7 @@ spec:
                         resizedCount:
                           type: integer
                       required:
-                      - currentCapacity
                       - name
-                      - resizedCapacity
                       type: object
                     type: object
                 type: object
@@ -18353,6 +18431,18 @@ spec:
                           x-kubernetes-int-or-string: true
                         currentCount:
                           type: integer
+                        currentStorageClass:
+                          type: string
+                        modifiedCapacity:
+                          anyOf:
+                          - type: integer
+                          - type: string
+                          pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                          x-kubernetes-int-or-string: true
+                        modifiedCount:
+                          type: integer
+                        modifiedStorageClass:
+                          type: string
                         name:
                           type: string
                         resizedCapacity:
@@ -18364,9 +18454,7 @@ spec:
                         resizedCount:
                           type: integer
                       required:
-                      - currentCapacity
                       - name
-                      - resizedCapacity
                       type: object
                     type: object
                 type: object

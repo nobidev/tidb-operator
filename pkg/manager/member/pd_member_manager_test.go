@@ -38,6 +38,7 @@ import (
 	"github.com/pingcap/tidb-operator/pkg/apis/util/toml"
 	"github.com/pingcap/tidb-operator/pkg/controller"
 	"github.com/pingcap/tidb-operator/pkg/manager/suspender"
+	"github.com/pingcap/tidb-operator/pkg/manager/volumes"
 	"github.com/pingcap/tidb-operator/pkg/pdapi"
 )
 
@@ -931,11 +932,12 @@ func newFakePDMemberManager() (*pdMemberManager, cache.Indexer, cache.Indexer) {
 	podIndexer := fakeDeps.KubeInformerFactory.Core().V1().Pods().Informer().GetIndexer()
 	pvcIndexer := fakeDeps.KubeInformerFactory.Core().V1().PersistentVolumeClaims().Informer().GetIndexer()
 	pdManager := &pdMemberManager{
-		deps:      fakeDeps,
-		scaler:    NewFakePDScaler(),
-		upgrader:  NewFakePDUpgrader(),
-		failover:  NewFakePDFailover(),
-		suspender: suspender.NewFakeSuspender(),
+		deps:              fakeDeps,
+		scaler:            NewFakePDScaler(),
+		upgrader:          NewFakePDUpgrader(),
+		failover:          NewFakePDFailover(),
+		suspender:         suspender.NewFakeSuspender(),
+		podVolumeModifier: &volumes.FakePodVolumeModifier{},
 	}
 	return pdManager, podIndexer, pvcIndexer
 }
@@ -981,6 +983,19 @@ func newTidbClusterForPD() *v1alpha1.TidbCluster {
 				StorageClassName: pointer.StringPtr("my-storage-class"),
 			},
 			TiDB: &v1alpha1.TiDBSpec{},
+			TiFlash: &v1alpha1.TiFlashSpec{
+				ComponentSpec: v1alpha1.ComponentSpec{
+					Image: "tiflash-test-image",
+				},
+				ResourceRequirements: corev1.ResourceRequirements{
+					Requests: corev1.ResourceList{
+						corev1.ResourceCPU:     resource.MustParse("1"),
+						corev1.ResourceMemory:  resource.MustParse("2Gi"),
+						corev1.ResourceStorage: resource.MustParse("100Gi"),
+					},
+				},
+				Replicas: 3,
+			},
 		},
 	}
 }

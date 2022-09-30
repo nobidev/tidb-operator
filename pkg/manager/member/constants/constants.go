@@ -1,4 +1,4 @@
-// Copyright 2019 PingCAP, Inc.
+// Copyright 2021 PingCAP, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,16 +11,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package tools is used to track binary dependencies with go modules
-// https://github.com/golang/go/wiki/Modules#how-can-i-track-tool-dependencies-for-a-module
-package tools
+package constants
 
-import (
-	// linting tools
-	_ "github.com/client9/misspell/cmd/misspell"
-	_ "github.com/golangci/golangci-lint/cmd/golangci-lint"
-	_ "golang.org/x/tools/cmd/goimports"
+const (
+	// TiKVDataVolumeMountPath is the mount path for tikv data volume
+	TiKVDataVolumeMountPath = "/var/lib/tikv"
 
-	// code generator
-	_ "sigs.k8s.io/controller-tools/cmd/controller-gen"
+	// PDDataVolumeMountPath is the mount path for pd data volume
+	PDDataVolumeMountPath = "/var/lib/pd"
+
+	// TiCDCCertPath is the path for ticdc cert in container
+	TiCDCCertPath = "/var/lib/ticdc-tls"
 )
