@@ -1,0 +1,142 @@
+apiVersion: v1
+entries:
+  tidb-backup:
+  - apiVersion: v1
+    created: "2022-11-25T18:16:19.112162819Z"
+    deprecated: true
+    description: DEPRECATED(refer new instructions at https://docs.pingcap.com/tidb-in-kubernetes
+      for tidb-operator v1.1 and above) - A Helm chart for TiDB Backup or Restore
+    digest: c90608dc262be2de41ffb6db7584c0b2a27c63ee747e4b465335f4df9921f3af
+    home: https://github.com/pingcap/tidb-operator
+    keywords:
+    - newsql
+    - htap
+    - database
+    - mysql
+    - raft
+    name: tidb-backup
+    sources:
+    - https://github.com/pingcap/tidb-operator
+    urls:
+    - tidb-backup-v1-canary.tgz
+    version: v1-canary
+  tidb-cluster:
+  - apiVersion: v1
+    created: "2022-11-25T18:16:19.11492858Z"
+    deprecated: true
+    description: DEPRECATED(refer new instructions at https://docs.pingcap.com/tidb-in-kubernetes
+      for tidb-operator v1.1 and above) - A Helm chart for TiDB Cluster
+    digest: d1a282060cb17f840aeb3d402f5e280655ae5a817037894dc06ae9db4ccc6aae
+    home: https://github.com/pingcap/tidb-operator
+    keywords:
+    - newsql
+    - htap
+    - database
+    - mysql
+    - raft
+    name: tidb-cluster
+    sources:
+    - https://github.com/pingcap/tidb-operator
+    urls:
+    - tidb-cluster-v1-canary.tgz
+    version: v1-canary
+  tidb-crds:
+  - apiVersion: v1
+    appVersion: v1
+    created: "2022-11-25T18:16:19.120266805Z"
+    description: tidb-crds Helm chart for Kubernetes
+    digest: 7151d132203cc8a050f6136032d954593a55dac0da188afc0b07f8f3f664ad68
+    home: https://github.com/nobidev/tidb-operator
+    keywords:
+    - crd
+    maintainers:
+    - email: tidb-operator@nobidev.com
+      name: nobidev
+    name: tidb-crds
+    sources:
+    - https://github.com/nobidev/tidb-operator
+    urls:
+    - tidb-crds-v1.tgz
+    version: v1
+  tidb-drainer:
+  - apiVersion: v1
+    created: "2022-11-25T18:16:19.120748099Z"
+    description: A Helm chart for TiDB Binlog drainer.
+    digest: 064e054f2767dde19762014da5b5d6f4e65f9cad212ee27db4054d04f12fd9e3
+    home: https://github.com/pingcap/tidb-operator
+    keywords:
+    - newsql
+    - htap
+    - database
+    - mysql
+    - cdc
+    name: tidb-drainer
+    sources:
+    - https://github.com/pingcap/tidb-operator
+    urls:
+    - tidb-drainer-22.11.25.tgz
+    version: 22.11.25
+  tidb-lightning:
+  - apiVersion: v1
+    created: "2022-11-25T18:16:19.121270491Z"
+    description: A Helm chart for TiDB Lightning
+    digest: 0e0b447e60d706438bd2fb99c98f5e228e77c25920c509567461f58364f5040e
+    home: https://github.com/pingcap/tidb-lightning
+    keywords:
+    - newsql
+    - database
+    - backup
+    name: tidb-lightning
+    sources:
+    - https://github.com/pingcap/tidb-operator
+    urls:
+    - tidb-lightning-22.11.25.tgz
+    version: 22.11.25
+  tidb-operator:
+  - apiVersion: v1
+    appVersion: v1-canary
+    created: "2022-11-25T18:16:19.122360576Z"
+    description: tidb-operator Helm chart for Kubernetes
+    digest: a1c221760bfd097487877d758bafce3359dc57c2122b52ff6a0700f8d1ec2834
+    home: https://github.com/pingcap/tidb-operator
+    keywords:
+    - operator
+    - newsql
+    - htap
+    - database
+    - mysql
+    - raft
+    maintainers:
+    - email: fuyecheng@pingcap.com
+      name: cofyc
+    - email: changjunchang@pingcap.com
+      name: weekface
+    - email: zhanghailong@pingcap.com
+      name: DanielZhangQD
+    - email: lichunzhu@pingcap.com
+      name: lichunzhu
+    name: tidb-operator
+    sources:
+    - https://github.com/pingcap/tidb-operator
+    urls:
+    - tidb-operator-v1-canary.tgz
+    version: v1-canary
+  tikv-importer:
+  - apiVersion: v1
+    created: "2022-11-25T18:16:19.122642572Z"
+    description: A Helm chart for TiKV Importer
+    digest: 7311e95b515e83c59cba7ea13a6cf9b8dc09e6a022f2db48fb4c26636854b301
+    home: https://github.com/pingcap/tidb-operator
+    keywords:
+    - newsql
+    - htap
+    - database
+    - mysql
+    - raft
+    name: tikv-importer
+    sources:
+    - https://github.com/pingcap/tidb-operator
+    urls:
+    - tikv-importer-22.11.25.tgz
+    version: 22.11.25
+generated: "2022-11-25T18:16:19.110581742Z"
