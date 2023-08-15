@@ -21,7 +21,7 @@ require (
 	github.com/aws/smithy-go v1.12.1
 	github.com/chai2010/gettext-go v0.0.0-20170215093142-bf70f2a70fb1 // indirect
 	github.com/codahale/hdrhistogram v0.0.0-20161010025455-3a0bb77429bd // indirect
-	github.com/docker/docker v1.4.2-0.20200309214505-aa6a9891b09c
+	github.com/docker/docker v20.10.24+incompatible
 	github.com/docker/spdystream v0.0.0-20181023171402-6480d4af844c // indirect
 	github.com/dsnet/compress v0.0.1 // indirect
 	github.com/dustin/go-humanize v1.0.0
